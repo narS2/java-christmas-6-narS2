@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Map;
+
 public enum EnumMenu {
     APPETIZER(0, 0, "애피타이저"),
     MAIN_DISH(1, -2023, "메인"),
@@ -28,12 +30,17 @@ public enum EnumMenu {
         this.name = name;
     }
 
-    public static EnumMenu matchingMenu(String inputMenuName){
-        for(EnumMenu menu : EnumMenu.values()){
-            if(menu.name.equalsIgnoreCase(inputMenuName)){
+    public static EnumMenu matchingMenu(String inputMenuName) {
+        for (EnumMenu menu : EnumMenu.values()) {
+            if (menu.name.equalsIgnoreCase(inputMenuName)) {
                 return menu;
             }
         }
         throw new IllegalArgumentException("[Error] 입력하신 메뉴는 없는 메뉴입니다.");
+    }
+
+    public static boolean isAllDrinks(Map<EnumMenu, Integer> orderDetail) {
+        return orderDetail.keySet().stream()
+                .allMatch(item -> item.type == DRINK.type);
     }
 }
