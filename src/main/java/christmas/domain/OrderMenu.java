@@ -5,17 +5,23 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OrderMenu {
+    private final int ORDER_COUNT_MAX = 20;
     private Map<EnumMenu, Integer> orderDetail;
 
     public OrderMenu() {
         this.orderDetail = new HashMap<>();
     }
 
-    public void addOrderDetail(String inputOrder) {
-        this.orderDetail = validateOrderDetail(inputOrder);
+    public boolean isPassEventPrice() {
+        int totalPrice = EnumMenu.calculateTotalPrice(orderDetail);
+        return totalPrice >= 10000;
     }
 
-    public Map<EnumMenu, Integer> validateOrderDetail(String inputOrder) {
+    public void addOrderDetail(String inputOrder) {
+        this.orderDetail = getOrderDetail(inputOrder);
+    }
+
+    public Map<EnumMenu, Integer> getOrderDetail(String inputOrder) {
         Map<EnumMenu, Integer> orderDetail = convertOrderMenu(inputOrder);
         validateOnlyDrink(EnumMenu.isAllDrinks(orderDetail), orderDetail);
         return orderDetail;
@@ -27,7 +33,6 @@ public class OrderMenu {
         }
     }
 
-    //주문 입력 예시 : "양송이수프-2,티본스테이크-2"
     private Map<EnumMenu, Integer> convertOrderMenu(String inputOrder) {
         return decodeOrderMenu(inputOrder).entrySet().stream()
                 .collect(Collectors.toMap(
@@ -50,6 +55,8 @@ public class OrderMenu {
             splitOrderMenu.put(part[0].trim(), Integer.parseInt(part[1].trim()));
         }
 
+        validateOrderAmount(splitOrderMenu);
+
         return splitOrderMenu;
     }
 
@@ -69,6 +76,16 @@ public class OrderMenu {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[Error] 수량은 숫자로 입력해주세요.");
+        }
+    }
+
+    private void validateOrderAmount(Map<String, Integer> splitOrderMenu) {
+        int totalQuantity = splitOrderMenu.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        if (totalQuantity > ORDER_COUNT_MAX) {
+            throw new IllegalArgumentException("[Error] 주문 가능한 메뉴의 최대 수량은 20개입니다.");
         }
     }
 }

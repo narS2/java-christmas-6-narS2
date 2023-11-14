@@ -43,4 +43,10 @@ public enum EnumMenu {
         return orderDetail.keySet().stream()
                 .allMatch(item -> item.type == DRINK.type);
     }
+
+    public static int calculateTotalPrice(Map<EnumMenu, Integer> orderDetail){
+        return orderDetail.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().price * entry.getValue())
+                .sum();
+    }
 }
