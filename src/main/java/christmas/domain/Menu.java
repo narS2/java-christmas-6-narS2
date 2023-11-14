@@ -49,4 +49,18 @@ public enum Menu {
                 .mapToInt(entry -> entry.getKey().price * entry.getValue())
                 .sum();
     }
+
+    public static int calculateMainDishDiscount(Map<Menu, Integer> orderDetail) {
+        return orderDetail.entrySet().stream()
+                .filter(entry -> entry.getKey().type == MAIN_DISH.type)
+                .mapToInt(entry -> MAIN_DISH.price * entry.getValue())
+                .sum();
+    }
+
+    public static int calculateDessertDiscount(Map<Menu, Integer> orderDetail) {
+        return orderDetail.entrySet().stream()
+                .filter(entry -> entry.getKey().type == DESSERT.type)
+                .mapToInt(entry -> DESSERT.price * entry.getValue())
+                .sum();
+    }
 }
