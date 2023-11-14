@@ -4,8 +4,8 @@ import java.util.Map;
 
 public enum Menu {
     APPETIZER(0, 0, "애피타이저"),
-    MAIN_DISH(1, -2023, "메인"),
-    DESSERT(2, -2023, "디저트"),
+    MAIN_DISH(1, 2023, "메인"),
+    DESSERT(2, 2023, "디저트"),
     DRINK(3, 0, "음료"),
     MUSHROOM_SOUP(0, 6000, "양송이수프"),
     TAPAS(0, 5500, "타파스"),

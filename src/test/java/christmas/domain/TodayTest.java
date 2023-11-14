@@ -17,16 +17,16 @@ class TodayTest {
     @Test
     @DisplayName("주말 여부 확인 테스트 - 주말이 아닌 경우")
     void testIsWeekendFalse() {
-        today.setDate(9); // 예를 들어 12월 9일이 월요일이라고 가정
-        assertFalse(today.isWeekend(), "월요일은 주말이 아니어야 합니다.");
+        today.setDate(3);
+        assertFalse(today.isWeekend(), "3일(일요일)은 주말이 아니다.");
     }
 
     @Test
     @DisplayName("12월 날짜 유효성 검사 - 잘못된 날짜")
     void testValidateDecemberDateInvalid() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Today().setDate(32); // 12월에는 31일까지만 존재
+            today.setDate(32);
         });
-        assertEquals("[ERROR] 1~31일 범위 내 숫자만 입력해주세요.", exception.getMessage());
+        assertEquals("[ERROR] 날짜는 1~31일 범위 내에서만 유효합니다.", exception.getMessage());
     }
 }
