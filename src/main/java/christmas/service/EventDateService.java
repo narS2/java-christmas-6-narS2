@@ -2,7 +2,7 @@ package christmas.service;
 
 import christmas.domain.EventDate;
 
-public class EventDateService implements EventDatable{
+public class EventDateService implements EventDatable {
     @Override
     public boolean isChristmasDDay(int todayDate) {
         return todayDate == EventDate.CHRISTMAS_D_DAY_END.getDay();

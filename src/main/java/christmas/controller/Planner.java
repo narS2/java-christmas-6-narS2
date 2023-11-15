@@ -19,7 +19,7 @@ public class Planner {
     private Today today;
     private EventPrice eventPrice;
 
-    public void run(){
+    public void run() {
         InputView.printStartMessage();
         dateRun();
         menuRun();
@@ -52,14 +52,14 @@ public class Planner {
         }
     }
 
-    private String giveaway(){
-        if(eventPrice.isGiveawayLimit()){
+    private String giveaway() {
+        if (eventPrice.isGiveawayLimit()) {
             return Menu.CHAMPAGNE.getName() + " 1개";
         }
         return null;
     }
 
-    private void discountDetailsRun(){
+    private void discountDetailsRun() {
         OutputView.printMenu(orderDAO.getOrder());
         OutputView.printTotalOrderPrice(eventPrice.getTotalPrice());
         OutputView.printGiveAway(giveaway());

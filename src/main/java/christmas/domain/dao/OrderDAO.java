@@ -16,11 +16,11 @@ public class OrderDAO {
         this.orderParsable = new OrderParser();
     }
 
-    public static OrderDAO getInstance(){
+    public static OrderDAO getInstance() {
         return ORDER_DAO;
     }
 
-    public Map<Menu, Integer> getOrder(){
+    public Map<Menu, Integer> getOrder() {
         return Collections.unmodifiableMap(orderDetail);
     }
 

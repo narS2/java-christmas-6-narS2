@@ -31,7 +31,7 @@ public enum Menu {
         this.name = name;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
@@ -53,7 +53,7 @@ public enum Menu {
                 .allMatch(item -> item.type == DRINK.type);
     }
 
-    public static int calculateTotalPrice(Map<Menu, Integer> orderDetail){
+    public static int calculateTotalPrice(Map<Menu, Integer> orderDetail) {
         return orderDetail.entrySet().stream()
                 .mapToInt(entry -> entry.getKey().price * entry.getValue())
                 .sum();

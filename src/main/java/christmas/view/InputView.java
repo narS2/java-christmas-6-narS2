@@ -17,7 +17,7 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static void printResultMessage(){
+    public static void printResultMessage() {
         System.out.println(Message.PRINT_BENEFIT_PREVIEW.getMessage());
         System.out.println();
     }

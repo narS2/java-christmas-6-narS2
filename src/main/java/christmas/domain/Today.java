@@ -26,7 +26,7 @@ public class Today {
     }
 
     public int getChristmasEventToday() {
-        if(eventDatable.isChristmasEventDay(todayDate)) {
+        if (eventDatable.isChristmasEventDay(todayDate)) {
             return (todayDate * 100) + 900;
         }
         return 0;
