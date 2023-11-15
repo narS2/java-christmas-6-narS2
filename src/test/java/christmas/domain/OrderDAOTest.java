@@ -34,7 +34,7 @@ class OrderDAOTest {
             orderDAO.addOrderDetail("티본스테이크:2");
         });
 
-        String expectedMessage = "[Error] 주문메뉴-수량 형식으로 입력해주세요.";
+        String expectedMessage = "[ERROR] 주문메뉴-수량 형식으로 입력해주세요.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -46,7 +46,7 @@ class OrderDAOTest {
             orderDAO.addOrderDetail("없는메뉴-2");
         });
 
-        String expectedMessage = "[Error] 입력하신 메뉴는 없는 메뉴입니다.";
+        String expectedMessage = "[ERROR] 입력하신 메뉴는 없는 메뉴입니다.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -58,7 +58,7 @@ class OrderDAOTest {
             orderDAO.addOrderDetail("양송이수프-두개");
         });
 
-        String expectedMessage = "[Error] 수량은 숫자로 입력해주세요.";
+        String expectedMessage = "[ERROR] 수량은 숫자로 입력해주세요.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -70,7 +70,7 @@ class OrderDAOTest {
             orderDAO.addOrderDetail("제로콜라-3,레드와인-2");
         });
 
-        String expectedMessage = "[Error] 음료만 주문할 수 없습니다.";
+        String expectedMessage = "[ERROR] 음료만 주문할 수 없습니다.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -82,7 +82,7 @@ class OrderDAOTest {
             orderDAO.addOrderDetail("양송이수프-10,제로콜라-11");
         });
 
-        String expectedMessage = "[Error] 주문 가능한 메뉴의 최대 수량은 20개입니다.";
+        String expectedMessage = "[ERROR] 주문 가능한 메뉴의 최대 수량은 20개입니다.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }

@@ -13,12 +13,12 @@ public enum EventBadge {
         this.badgeName = badgeName;
     }
 
-    public static String getBadgeForDiscount(int totalDiscount, String nonPassEvent) {
+    public static String getBadgeForDiscount(int totalDiscount) {
         for (EventBadge eventBadge : EventBadge.values()) {
             if (totalDiscount >= eventBadge.discountPrice) {
                 return eventBadge.badgeName;
             }
         }
-        return nonPassEvent;
+        return null;
     }
 }
