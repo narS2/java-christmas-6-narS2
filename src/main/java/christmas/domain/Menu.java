@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.Map;
+import java.util.AbstractMap;
 
 public enum Menu {
     APPETIZER(0, 0, "애피타이저"),
@@ -37,6 +38,10 @@ public enum Menu {
             }
         }
         throw new IllegalArgumentException("[Error] 입력하신 메뉴는 없는 메뉴입니다.");
+    }
+
+    public static AbstractMap.SimpleEntry<String, Integer> giveawayChampagne() {
+        return new AbstractMap.SimpleEntry<>(CHAMPAGNE.name, CHAMPAGNE.price);
     }
 
     public static boolean isAllDrinks(Map<Menu, Integer> orderDetail) {
