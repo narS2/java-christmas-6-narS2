@@ -58,7 +58,7 @@ class OrderDAOTest {
             orderDAO.addOrderDetail("양송이수프-두개");
         });
 
-        String expectedMessage = "[ERROR] 수량은 숫자로 입력해주세요.";
+        String expectedMessage = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }

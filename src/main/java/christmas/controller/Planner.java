@@ -43,7 +43,7 @@ public class Planner {
         while (true) {
             try {
                 String input = InputView.readVisitDate();
-                Validator.validateStringToNumber(input);
+                Validator.validateDateToNumber(input);
                 today = new Today(Integer.parseInt(input), eventDatable);
                 break;
             } catch (IllegalArgumentException e) {
