@@ -31,13 +31,17 @@ public enum Menu {
         this.name = name;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public static Menu matchingMenu(String inputMenuName) {
         for (Menu menu : Menu.values()) {
             if (menu.name.equalsIgnoreCase(inputMenuName)) {
                 return menu;
             }
         }
-        throw new IllegalArgumentException("[Error] 입력하신 메뉴는 없는 메뉴입니다.");
+        throw new IllegalArgumentException("[ERROR] 입력하신 메뉴는 없는 메뉴입니다.");
     }
 
     public static AbstractMap.SimpleEntry<String, Integer> giveawayChampagne() {

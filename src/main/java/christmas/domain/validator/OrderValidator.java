@@ -9,7 +9,7 @@ public class OrderValidator {
 
     public void validateOnlyDrink(boolean allDrinks, Map<Menu, Integer> orderDetail) {
         if (allDrinks && !orderDetail.isEmpty()) {
-            throw new IllegalArgumentException("[Error] 음료만 주문할 수 없습니다.");
+            throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다.");
         }
     }
 
@@ -19,7 +19,7 @@ public class OrderValidator {
                 .sum();
 
         if (totalQuantity > ORDER_COUNT_MAX) {
-            throw new IllegalArgumentException("[Error] 주문 가능한 메뉴의 최대 수량은 20개입니다.");
+            throw new IllegalArgumentException("[ERROR] 주문 가능한 메뉴의 최대 수량은 20개입니다.");
         }
     }
 
@@ -30,7 +30,7 @@ public class OrderValidator {
 
     private void validateInputFormat(String[] part) {
         if (part.length != 2) {
-            throw new IllegalArgumentException("[Error] 주문메뉴-수량 형식으로 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 주문메뉴-수량 형식으로 입력해주세요.");
         }
     }
 
@@ -38,7 +38,7 @@ public class OrderValidator {
         try {
             Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[Error] 수량은 숫자로 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 수량은 숫자로 입력해주세요.");
         }
     }
 }
