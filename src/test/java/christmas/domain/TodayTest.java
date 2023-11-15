@@ -1,7 +1,7 @@
 package christmas.domain;
 
-import christmas.domain.validator.EventDatable;
-import christmas.domain.validator.EventDateService;
+import christmas.service.EventDatable;
+import christmas.service.EventDateService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

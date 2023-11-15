@@ -10,7 +10,7 @@ public class EventDateService implements EventDatable{
 
     @Override
     public boolean isChristmasEventDay(int todayDate) {
-        return todayDate >= EventDate.CHRISTMAS_D_DAY_END.getDay();
+        return todayDate <= EventDate.CHRISTMAS_D_DAY_END.getDay();
     }
 
     @Override
