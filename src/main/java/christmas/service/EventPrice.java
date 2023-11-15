@@ -1,7 +1,8 @@
 package christmas.service;
 
+import christmas.domain.EventBadge;
 import christmas.domain.Menu;
-import christmas.domain.OrderDAO;
+import christmas.domain.dao.OrderDAO;
 import christmas.domain.Today;
 
 import java.util.Map;
@@ -44,6 +45,13 @@ public class EventPrice {
         return specialDiscount;
     }
 
+    public int giveawayEventPrice() {
+        if (isGiveawayLimit()) {
+            return Menu.giveawayChampagne().getValue();
+        }
+        return nonPassDiscount;
+    }
+
     public String giveawayEventItem(String nonPassEvent) {
         if (isGiveawayLimit()) {
             return Menu.giveawayChampagne().getKey();
@@ -51,11 +59,8 @@ public class EventPrice {
         return nonPassEvent;
     }
 
-    public int giveawayEventPrice() {
-        if (isGiveawayLimit()) {
-            return Menu.giveawayChampagne().getValue();
-        }
-        return nonPassDiscount;
+    public String getEventBadge(String nonPassEvent){
+        return EventBadge.getBadgeForDiscount(totalDiscount(), nonPassEvent);
     }
 
     private boolean isEventPriceLimit() {
@@ -64,5 +69,10 @@ public class EventPrice {
 
     private boolean isGiveawayLimit() {
         return totalPrice >= giveawayPriceLimit;
+    }
+
+    private int totalDiscount() {
+        return christmasDiscount() + weekdayDiscount() + weekendDiscount()
+                + specialDiscount() + giveawayEventPrice();
     }
 }
