@@ -5,7 +5,7 @@ import christmas.domain.Menu;
 import java.util.Map;
 
 public class OrderValidator {
-    private static final int ORDER_COUNT_MAX = 20;
+    private final int ORDER_COUNT_MAX = 20;
 
     public void validateOnlyDrink(boolean allDrinks, Map<Menu, Integer> orderDetail) {
         if (allDrinks && !orderDetail.isEmpty()) {

@@ -5,6 +5,7 @@ import christmas.domain.Menu;
 import christmas.domain.dao.OrderDAO;
 import christmas.domain.Today;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -12,21 +13,16 @@ public class EventPrice {
     private final OrderDAO orderDAO = OrderDAO.getInstance();
     private final Map<Menu, Integer> orderDetail = orderDAO.getOrder();
     private final Map<String, Integer> discountDetails = new LinkedHashMap<>();
-    private final int eventPriceLimit;
-    private final int specialDiscount;
-    private final int giveawayPriceLimit;
-    private final int nonPassDiscount;
-    private final int totalPrice;
+    private final int EVENT_PRICE_LIMIT = 10000;
+    private final int SPECIAL_DISCOUNT = 1000;
+    private final int GIVEAWAY_PRICE_LIMIT = 120000;
+    private final int NON_PASS_DISCOUNT = 0;
+    private final int TOTAL_PRICE;
     private final Today today;
 
-    public EventPrice(int eventPriceLimit, int specialDiscount,
-                      int giveawayPriceLimit, int nonPassDiscount, Today today) {
-        this.eventPriceLimit = eventPriceLimit;
-        this.specialDiscount = specialDiscount;
-        this.giveawayPriceLimit = giveawayPriceLimit;
-        this.nonPassDiscount = nonPassDiscount;
+    public EventPrice(Today today) {
         this.today = today;
-        this.totalPrice = Menu.calculateTotalPrice(orderDetail);
+        this.TOTAL_PRICE = Menu.calculateTotalPrice(orderDetail);
         applyEvent();
     }
 
@@ -35,11 +31,11 @@ public class EventPrice {
     }
 
     public int getTotalPrice() {
-        return totalPrice;
+        return TOTAL_PRICE;
     }
 
     public Map<String, Integer> getDiscountDetails() {
-        return discountDetails;
+        return Collections.unmodifiableMap(discountDetails);
     }
 
     public int totalDiscount() {
@@ -47,14 +43,14 @@ public class EventPrice {
     }
 
     public int totalDiscountExcludingGiveaway() {
-        return totalPrice - (discountDetails.entrySet().stream()
+        return TOTAL_PRICE - (discountDetails.entrySet().stream()
                 .filter(entry -> !entry.getKey().equals("증정 이벤트"))
                 .mapToInt(Map.Entry::getValue)
                 .sum());
     }
 
     public boolean isGiveawayLimit() {
-        return totalPrice >= giveawayPriceLimit;
+        return TOTAL_PRICE >= GIVEAWAY_PRICE_LIMIT;
     }
 
     private void applyEvent() {
@@ -74,7 +70,7 @@ public class EventPrice {
     private void weekdayDiscount() {
         int dessertDiscount = Menu.calculateDessertDiscount(orderDetail);
 
-        if (!today.isWeekend() && dessertDiscount > nonPassDiscount) {
+        if (!today.isWeekend() && dessertDiscount > NON_PASS_DISCOUNT) {
             discountDetails.put("평일 할인", dessertDiscount);
         }
     }
@@ -82,14 +78,14 @@ public class EventPrice {
     private void weekendDiscount() {
         int mainDishDiscount = Menu.calculateMainDishDiscount(orderDetail);
 
-        if (today.isWeekend() && mainDishDiscount > nonPassDiscount) {
+        if (today.isWeekend() && mainDishDiscount > NON_PASS_DISCOUNT) {
             discountDetails.put("주말 할인", mainDishDiscount);
         }
     }
 
     private void specialDiscount() {
         if (today.isSpecialDay()) {
-            discountDetails.put("특별 할인", specialDiscount);
+            discountDetails.put("특별 할인", SPECIAL_DISCOUNT);
         }
     }
 
@@ -100,6 +96,6 @@ public class EventPrice {
     }
 
     private boolean isEventPriceLimit() {
-        return totalPrice >= eventPriceLimit;
+        return TOTAL_PRICE >= EVENT_PRICE_LIMIT;
     }
 }

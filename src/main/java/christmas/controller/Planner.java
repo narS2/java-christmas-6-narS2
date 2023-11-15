@@ -12,10 +12,6 @@ import christmas.view.OutputView;
 public class Planner {
     private final EventDatable eventDatable = new EventDateService();
     private final OrderDAO orderDAO = OrderDAO.getInstance();
-    private static final int eventPriceLimit = 10000;
-    private static final int specialDiscount = 1000;
-    private static final int giveawayPriceLimit = 120000;
-    private static final int nonPassDiscount = 0;
     private Today today;
     private EventPrice eventPrice;
 
@@ -23,7 +19,7 @@ public class Planner {
         InputView.printStartMessage();
         dateRun();
         menuRun();
-        eventPrice = new EventPrice(eventPriceLimit, specialDiscount, giveawayPriceLimit, nonPassDiscount, today);
+        eventPrice = new EventPrice(today);
         InputView.printResultMessage();
         discountDetailsRun();
     }

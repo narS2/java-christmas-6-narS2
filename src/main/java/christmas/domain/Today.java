@@ -3,12 +3,12 @@ package christmas.domain;
 import christmas.service.EventDatable;
 
 public class Today {
+    private final DayOfWeek startDayOfMonth = DayOfWeek.FRIDAY;
+    private final EventDatable eventDatable;
     private final int INDEX_ALIGN = 1;
     private final int WEEK_LENGTH = 7;
-    private final DayOfWeek startDayOfMonth = DayOfWeek.FRIDAY;
     private DayOfWeek todayOfWeek;
     private int todayDate;
-    private final EventDatable eventDatable;
 
     enum DayOfWeek {
         SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
